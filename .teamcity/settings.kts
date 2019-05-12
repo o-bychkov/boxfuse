@@ -34,14 +34,14 @@ project {
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "target/*jar"
+    artifactRules = "target/*war"
     vcs {
         root(BoxFuseVCS)
     }
 
     steps {
         maven {
-            goals = "clean test"
+            goals = "war"
             // runnerArgs = "-Dmaven.test.failure.ignore=true"
             // mavenVersion = auto()
         }

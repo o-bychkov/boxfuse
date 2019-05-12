@@ -33,16 +33,16 @@ project {
 
 object Build : BuildType({
     name = "Build"
-
+    artifactRules = "target/*jar"
     vcs {
-        root(DslContext.settingsRoot)
+        root(BoxFuseVCS)
     }
 
     steps {
         maven {
             goals = "clean test"
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
-            mavenVersion = auto()
+            // runnerArgs = "-Dmaven.test.failure.ignore=true"
+            // mavenVersion = auto()
         }
     }
 
@@ -54,4 +54,9 @@ object Build : BuildType({
     requirements {
         equals("system.agent.name", "web-0")
     }
+})
+
+object BoxFuseVCS : GitVcsRoot ({
+    name = "BoxFuseVCS"
+    url = "https://github.com/o-bychkov/boxfuse"
 })

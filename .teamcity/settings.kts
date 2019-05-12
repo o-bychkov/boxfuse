@@ -41,7 +41,7 @@ object Build : BuildType({
 
     steps {
         maven {
-            goals = "jar:jar"
+            goals = "war:war"
             // runnerArgs = "-Dmaven.test.failure.ignore=true"
             // mavenVersion = auto()
         }

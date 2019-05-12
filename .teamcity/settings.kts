@@ -41,7 +41,8 @@ object Build : BuildType({
 
     steps {
         maven {
-            runnerArgs = "-Dmaven.test.failure.ignore=true"
+            goals = "jar"
+            // runnerArgs = "-Dmaven.test.failure.ignore=true"
             // mavenVersion = auto()
         }
     }

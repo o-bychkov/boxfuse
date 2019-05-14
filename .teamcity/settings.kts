@@ -73,7 +73,9 @@ object Deploy : BuildType ({
         }
     }
     triggers {
-        vcs {
+        finishBuildTrigger {
+            buildType = "${Build.id}"
+            successfulOnly = true
         }
     }
     requirements {

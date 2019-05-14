@@ -40,9 +40,6 @@ project {
 object Build : BuildType({
     name = "Build"
     artifactRules = "target/*jar"
-    vcs {
-        root(BoxFuseVCS)
-    }
 
     steps {
         maven {
@@ -50,10 +47,6 @@ object Build : BuildType({
         }
     }
 
-    triggers {
-        vcs {
-        }
-    }
 
     requirements {
         equals("system.agent.name", "web-0")

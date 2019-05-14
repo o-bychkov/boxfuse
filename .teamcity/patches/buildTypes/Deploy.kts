@@ -23,4 +23,12 @@ changeBuildType(RelativeId("Deploy")) {
             }
         }
     }
+
+    dependencies {
+        remove(RelativeId("Build")) {
+            snapshot {
+            }
+        }
+
+    }
 }

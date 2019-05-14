@@ -30,12 +30,8 @@ version = "2018.2"
 project {
     vcsRoot(BoxFuseVCS)
     sequence{
-        build(Build) {
-            produces("*.war")
-        }
-        build(Deploy) {
-            requires(Build, "*.war")
-        }
+        build(Build)
+        build(Deploy)
     }
 }
 
@@ -48,7 +44,7 @@ object Build : BuildType({
 
     steps {
         maven {
-            goals = "war:war"
+            goals = "jar:jar"
         }
     }
 
@@ -70,7 +66,7 @@ object Deploy : BuildType ({
             type = "ssh-deploy-runner"
             param("jetbrains.buildServer.deployer.username", "root")
             param("teamcitySshKey", "id_rsa")
-            param("jetbrains.buildServer.deployer.sourcePath", "/usr/share/app/*.war")
+            param("jetbrains.buildServer.deployer.sourcePath", "/usr/share/app/*.jar")
             param("jetbrains.buildServer.deployer.targetUrl", "192.168.0.112:/opt")
             param("jetbrains.buildServer.sshexec.authMethod", "UPLOADED_KEY")
             param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")

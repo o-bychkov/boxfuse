@@ -2,6 +2,8 @@ import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
 import jetbrains.buildServer.configs.kotlin.v2018_2.vcs.GitVcsRoot
+import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.finishBuildTrigger
+
 
 /*
 The settings script is an entry point for defining a TeamCity
@@ -76,6 +78,8 @@ object Deploy : BuildType ({
         finishBuildTrigger {
             buildType = "${Build.id}"
             successfulOnly = true
+        }
+        vcs {
         }
     }
     requirements {

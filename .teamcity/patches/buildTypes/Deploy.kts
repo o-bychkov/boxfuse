@@ -19,6 +19,7 @@ changeBuildType(RelativeId("Deploy")) {
         add {
             finishBuildTrigger {
                 buildType = "Boxfuse_Build"
+                successfulOnly = true
             }
         }
     }

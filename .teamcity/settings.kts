@@ -1,3 +1,4 @@
+package _Self.buildTypes
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
@@ -29,7 +30,14 @@ version = "2018.2"
 
 project {
     vcsRoot(BoxFuseVCS)
-    buildType(Build)
+    sequence{
+        build(Build) {
+            produces("*.war")
+        }
+        build(Deploy) {
+            requires(Build, "*.war")
+        }
+    }
 }
 
 object Build : BuildType({
@@ -42,8 +50,6 @@ object Build : BuildType({
     steps {
         maven {
             goals = "war:war"
-            // runnerArgs = "-Dmaven.test.failure.ignore=true"
-            // mavenVersion = auto()
         }
     }
 
@@ -52,6 +58,29 @@ object Build : BuildType({
         }
     }
 
+    requirements {
+        equals("system.agent.name", "web-0")
+    }
+})
+
+object Deploy : BuildType ({
+    name = "Deploy"
+    steps {
+        step {
+            name = "Deploy"
+            type = "ssh-deploy-runner"
+            param("jetbrains.buildServer.deployer.username", "root")
+            param("teamcitySshKey", "id_rsa")
+            param("jetbrains.buildServer.deployer.sourcePath", "/opt")
+            param("jetbrains.buildServer.deployer.targetUrl", "192.168.0.112:/usr/share/app/*.war")
+            param("jetbrains.buildServer.sshexec.authMethod", "UPLOADED_KEY")
+            param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")
+        }
+    }
+    triggers {
+        vcs {
+        }
+    }
     requirements {
         equals("system.agent.name", "web-0")
     }

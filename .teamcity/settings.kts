@@ -79,8 +79,6 @@ object Deploy : BuildType ({
             buildType = "${Build.id}"
             successfulOnly = true
         }
-        vcs {
-        }
     }
     requirements {
         equals("system.agent.name", "web-0")

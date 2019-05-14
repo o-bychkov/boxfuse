@@ -1,4 +1,3 @@
-package _Self.buildTypes
 import jetbrains.buildServer.configs.kotlin.v2018_2.*
 import jetbrains.buildServer.configs.kotlin.v2018_2.buildSteps.maven
 import jetbrains.buildServer.configs.kotlin.v2018_2.triggers.vcs
@@ -71,8 +70,8 @@ object Deploy : BuildType ({
             type = "ssh-deploy-runner"
             param("jetbrains.buildServer.deployer.username", "root")
             param("teamcitySshKey", "id_rsa")
-            param("jetbrains.buildServer.deployer.sourcePath", "/opt")
-            param("jetbrains.buildServer.deployer.targetUrl", "192.168.0.112:/usr/share/app/*.war")
+            param("jetbrains.buildServer.deployer.sourcePath", "/usr/share/app/*.war")
+            param("jetbrains.buildServer.deployer.targetUrl", "192.168.0.112:/opt")
             param("jetbrains.buildServer.sshexec.authMethod", "UPLOADED_KEY")
             param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")
         }

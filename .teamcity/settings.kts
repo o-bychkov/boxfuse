@@ -37,7 +37,7 @@ project {
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "target/*war"
+    artifactRules = "target/*jar"
     vcs {
         root(BoxFuseVCS)
     }

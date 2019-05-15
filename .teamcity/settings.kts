@@ -39,14 +39,14 @@ project {
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "target/*jar"
+    artifactRules = "%build.counter%/target/*.jar => /opt/%build.counter%/helo.jar"
     vcs {
         root(BoxFuseVCS)
     }
     steps {
         maven {
             goals = "jar:jar"
-            useOwnLocalRepo = true
+            // useOwnLocalRepo = true
         }
     }
     triggers {

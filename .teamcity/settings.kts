@@ -39,7 +39,7 @@ project {
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "target/*.jar => //opt/"
+    artifactRules = "target/*.jar"
     vcs {
         root(BoxFuseVCS)
     }
@@ -67,7 +67,7 @@ object Deploy : BuildType ({
             type = "ssh-deploy-runner"
             param("jetbrains.buildServer.deployer.username", "root")
             param("teamcitySshKey", "id_rsa")
-            param("jetbrains.buildServer.deployer.sourcePath", "/usr/share/app/*.jar")
+            param("jetbrains.buildServer.deployer.sourcePath", "*.jar")
             param("jetbrains.buildServer.deployer.targetUrl", "192.168.0.112:/opt")
             param("jetbrains.buildServer.sshexec.authMethod", "UPLOADED_KEY")
             param("jetbrains.buildServer.deployer.ssh.transport", "jetbrains.buildServer.deployer.ssh.transport.scp")
@@ -76,8 +76,11 @@ object Deploy : BuildType ({
     triggers {
         finishBuildTrigger {
             buildType = "${Build.id}"
-            successfulOnly = true
         }
+    }
+    artifacts(Build) {
+        buildRule = lastSuccessful()
+        artifactRules = "*.jar"
     }
     requirements {
         equals("system.agent.name", "web-0")

@@ -78,10 +78,7 @@ object Deploy : BuildType ({
             buildType = "${Build.id}"
         }
     }
-    artifacts(Build) {
-        buildRule = lastSuccessful()
-        artifactRules = "*.jar"
-    }
+
     requirements {
         equals("system.agent.name", "web-0")
     }

@@ -40,14 +40,19 @@ project {
 object Build : BuildType({
     name = "Build"
     artifactRules = "target/*jar"
-
+    vcs {
+        root(BoxFuseVCS)
+    }
     steps {
         maven {
             goals = "jar:jar"
             useOwnLocalRepo = true
         }
     }
-
+    triggers {
+        vcs {
+        }
+    }
 
     requirements {
         equals("system.agent.name", "web-0")

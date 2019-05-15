@@ -39,7 +39,7 @@ project {
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "%build.vcs.number%/target/*.jar => /opt/%build.vcs.number%/helo.jar"
+    artifactRules = "%teamcity.build.default.checkoutDir%/target/*.jar => /opt/%teamcity.build.default.checkoutDir%/helo.jar"
     vcs {
         root(BoxFuseVCS)
     }

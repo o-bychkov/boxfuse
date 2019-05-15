@@ -44,6 +44,7 @@ object Build : BuildType({
     steps {
         maven {
             goals = "jar:jar"
+            useOwnLocalRepo = true
         }
     }
 

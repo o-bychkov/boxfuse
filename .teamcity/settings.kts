@@ -39,7 +39,7 @@ project {
 
 object Build : BuildType({
     name = "Build"
-    artifactRules = "%build.counter%/target/*.jar => /opt/%build.counter%/helo.jar"
+    artifactRules = "%build.vcs.number%/target/*.jar => /opt/%build.vcs.number%/helo.jar"
     vcs {
         root(BoxFuseVCS)
     }
